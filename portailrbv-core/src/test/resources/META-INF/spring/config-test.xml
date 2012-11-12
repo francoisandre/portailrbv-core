@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:util="http://www.springframework.org/schema/util" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd     http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd     http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.5.xsd">
+
+
+	<bean id="geoNetworkConfig" class="fr.obsmip.sedoo.core.config.GeoNetworkConfig">
+
+		<property name="rootURL" value="http://localhost:8080/geosource" />
+	</bean>
+
+	<bean id="userDAO" class="fr.obsmip.sedoo.core.dao.GeoNetworkUserDAO">
+		<property name="login" value="admin" />
+		<property name="password" value="admin" />
+	</bean>
+
+	<bean id="obseraSite1" class="fr.obsmip.sedoo.core.domain.ObservationSite" p:label="Site 1" p:code="SITE1"></bean>
+	<bean id="obseraSite2" class="fr.obsmip.sedoo.core.domain.ObservationSite" p:label="Site 2" p:code="SITE2"></bean>
+	<bean id="obseraSite3" class="fr.obsmip.sedoo.core.domain.ObservationSite" p:label="Site 3" p:code="SITE3"></bean>
+	<bean id="obseraSite4" class="fr.obsmip.sedoo.core.domain.ObservationSite" p:label="Site 4" p:code="SITE4"></bean>
+	<bean id="obseraSite5" class="fr.obsmip.sedoo.core.domain.ObservationSite" p:label="Site 5" p:code="SITE5"></bean>
+	<bean id="obseraSite6" class="fr.obsmip.sedoo.core.domain.ObservationSite" p:label="Site 6" p:code="SITE6"></bean>
+	<bean id="obseraSite7" class="fr.obsmip.sedoo.core.domain.ObservationSite" p:label="Site 7" p:code="SITE7"></bean>
+	<bean id="obseraSite8" class="fr.obsmip.sedoo.core.domain.ObservationSite" p:label="Site 8" p:code="SITE8"></bean>
+
+	<bean id="obseraBassin1" class="fr.obsmip.sedoo.core.domain.DrainageBasin"
+		p:name="Capesterre">
+		<property name="observationSites">
+			<list>
+				<ref bean="obseraSite1" />
+				<ref bean="obseraSite5" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="obseraBassin3" class="fr.obsmip.sedoo.core.domain.DrainageBasin"
+		p:name="Vieux-Habitants">
+		<property name="observationSites">
+			<list>
+				<ref bean="obseraSite3" />
+				<ref bean="obseraSite6" />
+				<ref bean="obseraSite7" />
+				<ref bean="obseraSite8" />
+			</list>
+		</property>
+	</bean>
+	<bean id="obseraBassin2" class="fr.obsmip.sedoo.core.domain.DrainageBasin"
+		p:name="Bras-David"
+		p:url="https://morpho.ipgp.fr/Obsera/Bassins%20instrument%C3%A9s#Bras-David">
+		<property name="observationSites">
+			<list>
+				<ref bean="obseraSite2" />
+				<ref bean="obseraSite4" />
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="obsera" class="fr.obsmip.sedoo.core.domain.Observatory"
+		p:id="1"
+		p:longLabel="Observatoire de l’Erosion aux Antilles"
+		p:shortLabel="ObsErA"
+		p:description="L'Observatoire de l’Erosion aux Antilles (ObsErA) est un service d'observation de l’INSU-CNRS et de l’Institut de Physique du Globe de Paris consacré à l'étude de l’altération et de l’érosion aux Antilles. Membre du Réseau de Bassins Versants de Recherche et du Critical Zone Observatory Network, il implique des équipes de l'Institut de Physique du Globe de Paris, de l'Observatoire Volcanologique et Sismologique de Guadeloupe, de l'Université Antilles-Guyane, de l'Institut Universitaire Européen de la Mer (UBO) et du Laboratoire de Sciences de la Terre de l'Université Claude Bernard (Lyon I). L’objectif d’ObsErA est de permettre la constitution d’une base de données des flux d’eau (précipitations et débit des rivières), des flux de sédiments et de matière organique (en particulier de carbone) dans les rivières et sur les versants ainsi que de la composition chimique des rivières et des sols dans le contexte particulier de l’île de Basse-Terre en Guadeloupe, marquée par un climat tropical et un volcanisme actif. Cette base de données permettra à la communauté scientifique d'étudier et de quantifier les modes de d’érosion chimique et physique, ainsi que leur impact sur l'environnement (composition des sols, chimie des rivières, flux de carbones, etc...). A ce jour, ObsErA suit l'évolution de 3 bassins versants localisés dans l'enceinte du Parc National de Guadeloupe : Capesterre, Bras-David et Vieux-Habitants."
+		>
+		<property name="mainURL">
+			<list>
+				<value>https://morpho.ipgp.fr/Obsera/Home</value>
+			</list>
+		</property>
+		
+		<property name="relatedURL">
+			<list>
+				<value>http://rnbv.ipgp.fr/</value>
+			</list>
+		</property>
+		
+		<property name="drainageBasins">
+			<list>
+				<ref bean="obseraBassin1" />
+				<ref bean="obseraBassin2" />
+				<ref bean="obseraBassin3" />
+			</list>
+		</property>
+	</bean>
+	
+	
+	<bean id="observatoryDAO" class="fr.obsmip.sedoo.core.dao.ObservatoryDAOHibernateImpl" />
+		
+	<bean id="observatoryDAOSpring" class="fr.obsmip.sedoo.core.dao.ObservatoryDAOSpringImpl">
+	<property name="observatories">
+		<map>
+			<entry>
+				<key><value>OBSERA</value></key>
+			    <ref bean="obsera"/>
+			</entry>
+		</map>
+	</property>
+	</bean>
+	
+	<context:component-scan 
+		base-package="fr.obsmip.sedoo" />
+	
+	<bean id="dataSource"
+	class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+	<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+	<property name="url" value="jdbc:mysql://localhost:3306/portailrbv" />
+	<property name="username" value="portailrbv" />
+	<property name="password" value="portailrbv" />
+	</bean>
+	
+	<bean id="sessionFactory"
+	class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+	<property name="dataSource">
+		<ref bean="dataSource" />
+	</property>
+	<property name="hibernateProperties">
+		<props>
+			<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+			<prop key="hibernate.show_sql">true</prop>
+		</props>
+	</property>
+	<property name="annotatedClasses">
+		<list>
+			<value>
+				fr.obsmip.sedoo.core.domain.Observatory
+			</value>
+			<value>
+				fr.obsmip.sedoo.core.domain.DrainageBasin
+			</value>
+		</list>
+	</property>
+</bean>
+	
+	
+
+
+</beans>

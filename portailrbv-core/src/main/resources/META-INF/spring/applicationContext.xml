@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:util="http://www.springframework.org/schema/util" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd     http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd     http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.5.xsd">
+
+	<!-- The controllers are autodetected POJOs labeled with the @Controller 
+		annotation. -->
+	<context:component-scan base-package="fr.carnavello"
+		use-default-filters="false">
+	</context:component-scan>
+
+
+	<!-- Le bean correspondant à l'utilisateur par défaut -->
+	<bean id="defaultUser"
+		class="fr.carnavello.administration.commons.security.impl.UserImpl"
+		p:login="defaultUserLogin">
+		<property name="roleDAO" ref="defaultUserRoleDAO" />
+	</bean>
+
+	<!-- Les différentes permissions existantes -->
+	<bean id="searchMetadataPermission"
+		class="fr.carnavello.administration.commons.security.impl.NonContextualPermissionImpl">
+		<property name="id">
+        <util:constant static-field="fr.obsmip.sedoo.core.administration.security.PermissionConstant.SEARCH_METADATA"/>
+	    </property>
+	 </bean>
+	 
+	 <bean id="loginPermission"
+		class="fr.carnavello.administration.commons.security.impl.NonContextualPermissionImpl">
+		<property name="id">
+        <util:constant static-field="fr.obsmip.sedoo.core.administration.security.PermissionConstant.LOGIN"/>
+	    </property>
+	 </bean>
+	 
+	 <bean id="readMetaDadaPermission"
+		class="fr.carnavello.administration.commons.security.impl.NonContextualPermissionImpl">
+		<property name="id">
+        <util:constant static-field="fr.obsmip.sedoo.core.administration.security.PermissionConstant.READ_METADATA"/>
+	    </property>
+	 </bean>
+	 
+	 <bean id="askAccountPermission"
+		class="fr.carnavello.administration.commons.security.impl.NonContextualPermissionImpl">
+		<property name="id">
+        <util:constant static-field="fr.obsmip.sedoo.core.administration.security.PermissionConstant.ASK_ACCOUNT"/>
+	    </property>
+	 </bean>
+		
+
+	<!-- Les permissions correpsondant au rôle defaultUserRole -->
+	<bean id="defaultUserRole"
+		class="fr.carnavello.administration.commons.security.impl.RoleImpl"
+		p:id="defaultUserRole">
+		<property name="permissions">
+			<list>
+				<ref bean="searchMetadataPermission" />
+				<ref bean="loginPermission" />
+				<ref bean="readMetaDadaPermission" />
+				<ref bean="askAccountPermission" />
+			</list>
+		</property>
+	</bean>
+
+	
+</beans>
