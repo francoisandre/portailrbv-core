@@ -1,5 +1,6 @@
 package fr.obsmip.sedoo.core.domain;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -16,11 +17,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import fr.obsmip.sedoo.core.misc.StringTools;
-
 @Entity
 @Table(name="DRAINAGE_BASIN")
-public class DrainageBasin {
+public class DrainageBasin implements LazyLoadable {
 	
 	@Id
 	@Column(name="ID")
@@ -33,7 +32,7 @@ public class DrainageBasin {
 	@Transient
 	private String url;
 	
-	@OneToMany(cascade=CascadeType.ALL, mappedBy="drainageBasin", fetch=FetchType.EAGER)
+	@OneToMany(cascade=CascadeType.ALL, mappedBy="drainageBasin", fetch=FetchType.LAZY)
 	private List<Site> sites;
 
 	public String getName() {
@@ -56,19 +55,19 @@ public class DrainageBasin {
 	@JoinColumn(name="OBSERVATORY_ID")
 	private Observatory observatory;
 	
-	Site getObservationSiteByLabel(String name)
-	{
-		String protectedName = StringTools.protectIdentifier(name);
-		Iterator<Site> iterator = getSites().iterator();
-		while (iterator.hasNext()) {
-			Site observationSite = iterator.next();
-			if (observationSite.getLabel().compareToIgnoreCase(protectedName)==0)
-			{
-				return observationSite;
-			}
-		}
-		return null;
-	}
+//	Site getObservationSiteByLabel(String name)
+//	{
+//		String protectedName = StringTools.protectIdentifier(name);
+//		Iterator<Site> iterator = getSites().iterator();
+//		while (iterator.hasNext()) {
+//			Site observationSite = iterator.next();
+//			if (observationSite.getLabel().compareToIgnoreCase(protectedName)==0)
+//			{
+//				return observationSite;
+//			}
+//		}
+//		return null;
+//	}
 
 	
 	public Observatory getObservatory() {
@@ -93,6 +92,20 @@ public class DrainageBasin {
 
 	public void setSites(List<Site> sites) {
 		this.sites = sites;
+	}
+
+	public void addSite(Site site) {
+		if (sites == null)
+		{
+			sites = new ArrayList<Site>();
+		}
+		site.setDrainageBasin(this);
+		sites.add(site);		
+	}
+
+	@Override
+	public void ensureFullyLoaded() {
+		getSites().size();
 	}
 	
 	

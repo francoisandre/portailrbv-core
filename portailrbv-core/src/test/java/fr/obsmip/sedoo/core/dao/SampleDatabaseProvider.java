@@ -2,46 +2,23 @@ package fr.obsmip.sedoo.core.dao;
 
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
-import org.junit.Assert;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import fr.obsmip.sedoo.core.RBVApplication;
 import fr.obsmip.sedoo.core.domain.DrainageBasin;
 import fr.obsmip.sedoo.core.domain.Observatory;
+import fr.obsmip.sedoo.core.domain.Site;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations={"classpath:/META-INF/spring/contextProvider.xml","classpath:/META-INF/spring/config-test.xml"})
-public class DatabasePopulating extends AbstractDatabaseTest
+public class SampleDatabaseProvider extends AbstractDatabaseTest
 {
 	
-	
-	@Test
-	public void populate() throws Exception 
-	{
-		ObservatoryDAO observatoryDAO = RBVApplication.getInstance().getObservatoryDAO();
-		deleteAllObservatories();
-		List<Observatory> observatories = getObservatories();
-		Iterator<Observatory> iterator = observatories.iterator();
-		while (iterator.hasNext()) {
-			Observatory current = iterator.next();
-			observatoryDAO.save(current);
-		}
+	public static List<Observatory> getSampleModel() {
 		
-		List<Observatory> allObservatories = observatoryDAO.findAll();
-		Assert.assertEquals("Tous les élements doivent avoir été intégrés", allObservatories.size(), observatories.size());
-		
-		Assert.assertEquals("",3, observatoryDAO.getObservatoryByShortLabel("ObsErA").getDrainageBasins().size());
-	}
-	
-	
-	private List<Observatory> getObservatories()
-	{
 		List<Observatory> observatories = new ArrayList<Observatory>();
 		Observatory obsera = new Observatory();
 		obsera.setLongLabel("Observatoire de l’Erosion aux Antilles");
@@ -56,6 +33,13 @@ public class DatabasePopulating extends AbstractDatabaseTest
 		
 		DrainageBasin vieuxHabitants = new DrainageBasin();
 		vieuxHabitants.setName("Vieux-Habitants");
+		
+		Site fakeSite = new Site();
+		fakeSite.setAltitude(25D);
+		fakeSite.setLabel("Fake label");
+		
+		vieuxHabitants.addSite(fakeSite);
+		
 		
 		obsera.addDrainageBasin(capesterre);
 		obsera.addDrainageBasin(brasDavid);

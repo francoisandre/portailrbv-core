@@ -6,41 +6,27 @@ import fr.obsmip.sedoo.core.RBVApplication;
 import fr.obsmip.sedoo.core.domain.DrainageBasin;
 import fr.obsmip.sedoo.core.domain.Observatory;
 
-public class DrainageBasinDAOHibernateImpl extends CustomHibernateDaoSupport implements DrainageBasinDAO{
+public class DrainageBasinDAOHibernateImpl  implements DrainageBasinDAO{
 
-	public DrainageBasin getDrainageBasinById(Long id) 
-	{
-		List result = getHibernateTemplate().find("from DrainageBasin drainageBasin where drainageBasin.id = ?",id);
-		if (result.isEmpty())
-		{
-			return null;
-		}
-		else
-		{
-			return (DrainageBasin) result.iterator().next();
-		}
+	public void save(DrainageBasin drainageBasin) throws Exception {
+		// TODO Auto-generated method stub
+		
 	}
 
-	public void save(DrainageBasin drainageBasin) 
-	{
-		getHibernateTemplate().save(drainageBasin);
-	}
-
-	
 	public void delete(Long id) throws Exception {
+		// TODO Auto-generated method stub
 		
-		List result = getHibernateTemplate().find("from DrainageBasin drainageBasin where drainageBasin.id = ?",id);
-		if (result.isEmpty() == false)
-		{
-			getHibernateTemplate().delete(result.iterator().next());
-		}
-		
+	}
+
+	public DrainageBasin getDrainageBasinById(Long id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	public List<DrainageBasin> getDrainageBasinByObservatoryId(Long id) {
-		ObservatoryDAO observatoryDAO = RBVApplication.getInstance().getObservatoryDAO();
-		Observatory observatory = observatoryDAO.getObservatoryById(id);
-		return observatory.getDrainageBasins();
+		// TODO Auto-generated method stub
+		return null;
 	}
 
+	
 }

@@ -15,12 +15,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import fr.obsmip.sedoo.core.misc.StringTools;
-
 
 @Entity
 @Table(name="OBSERVATORY")
-public class Observatory
+public class Observatory implements LazyLoadable
 {
 	@Id
 	@Column(name="ID")
@@ -40,7 +38,7 @@ public class Observatory
 	@Transient
 	private List<String>  relatedURL;
 	
-	@OneToMany(cascade=CascadeType.ALL, mappedBy="observatory", fetch=FetchType.EAGER)
+	@OneToMany(cascade=CascadeType.ALL, mappedBy="observatory", fetch=FetchType.LAZY)
 	private List<DrainageBasin> drainageBasins;
 
 	
@@ -59,19 +57,19 @@ public class Observatory
 		this.drainageBasins = drainageBasins;
 	}
 	
-	public DrainageBasin getDrainageBasinByName(String name)
-	{
-		String protectedName = StringTools.protectIdentifier(name);
-		Iterator<DrainageBasin> iterator = drainageBasins.iterator();
-		while (iterator.hasNext()) {
-			DrainageBasin drainageBasin = iterator.next();
-			if (drainageBasin.getName().compareToIgnoreCase(protectedName)==0)
-			{
-				return drainageBasin;
-			}
-		}
-		return null;
-	}
+//	public DrainageBasin getDrainageBasinByName(String name)
+//	{
+//		String protectedName = StringTools.protectIdentifier(name);
+//		Iterator<DrainageBasin> iterator = drainageBasins.iterator();
+//		while (iterator.hasNext()) {
+//			DrainageBasin drainageBasin = iterator.next();
+//			if (drainageBasin.getName().compareToIgnoreCase(protectedName)==0)
+//			{
+//				return drainageBasin;
+//			}
+//		}
+//		return null;
+//	}
 	
 	
 	public String getLongLabel() {
@@ -95,20 +93,20 @@ public class Observatory
 	public void setRelatedURL(List<String> relatedURL) {
 		this.relatedURL = relatedURL;
 	}
-	public Site getObservationSiteByName(String name) 
-	{
-		Iterator<DrainageBasin> iterator = drainageBasins.iterator();
-		while (iterator.hasNext()) 
-		{
-			DrainageBasin currentDrainageBasin = iterator.next();
-			Site observationSiteByName = currentDrainageBasin.getObservationSiteByName(name);
-			if (observationSiteByName != null)
-			{
-				return observationSiteByName;
-			}
-		}
-		return null;
-	}
+//	public Site getObservationSiteByName(String name) 
+//	{
+//		Iterator<DrainageBasin> iterator = drainageBasins.iterator();
+//		while (iterator.hasNext()) 
+//		{
+//			DrainageBasin currentDrainageBasin = iterator.next();
+//			Site observationSiteByName = currentDrainageBasin.getObservationSiteByLabel(name);
+//			if (observationSiteByName != null)
+//			{
+//				return observationSiteByName;
+//			}
+//		}
+//		return null;
+//	}
 	
 	
 	public Long getId() {
@@ -132,5 +130,14 @@ public class Observatory
 		
 		drainageBasin.setObservatory(this);
 		drainageBasins.add(drainageBasin);
+	}
+	
+	@Override
+	public void ensureFullyLoaded() {
+		Iterator<DrainageBasin> iterator = getDrainageBasins().iterator();
+		while (iterator.hasNext()) {
+			DrainageBasin drainageBasin = (DrainageBasin) iterator.next();
+			drainageBasin.ensureFullyLoaded();
+		}
 	}
 }

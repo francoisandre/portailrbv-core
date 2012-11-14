@@ -1,15 +1,17 @@
 package fr.obsmip.sedoo.core;
 
-import fr.carnavello.administration.commons.Application;
 import fr.obsmip.sedoo.core.administration.security.Authenticator;
 import fr.obsmip.sedoo.core.config.GeoNetworkConfig;
 import fr.obsmip.sedoo.core.dao.DrainageBasinDAO;
 import fr.obsmip.sedoo.core.dao.MetadataDAO;
 import fr.obsmip.sedoo.core.dao.ObservatoryDAO;
 import fr.obsmip.sedoo.core.dao.UserDAO;
+import fr.obsmip.sedoo.core.spring.SpringBeanFactory;
 
-public class RBVApplication extends Application 
+public class RBVApplication  
 {
+	private BeanFactory beanFactory;
+	
 	protected static RBVApplication instance;
 	private final static String AUTHENTICATOR_BEAN_NAME="authenticator";
 	
@@ -29,22 +31,35 @@ public class RBVApplication extends Application
 
 
 
-	@Override
 	public void start() {
 		
 	}
 
 
 
-	@Override
 	public void stop() {
 		
 	}
+	
+	
+	
+	
+	public BeanFactory getBeanFactory() 
+	{
+		if (beanFactory == null)
+		{
+			beanFactory = new SpringBeanFactory();
+		}
+		return beanFactory;
+	}
+	
 
 	public UserDAO getUserDAO() 
 	{
 		return (UserDAO) getBeanFactory().getBeanByName(BeanFactory.USER_DAO_BEAN_NAME);
 	}
+
+	
 
 	public Authenticator getAuthenticator() 
 	{
@@ -63,14 +78,13 @@ public class RBVApplication extends Application
 		
 	}
 
-
 	public ObservatoryDAO getObservatoryDAO() {
 		
 		return (ObservatoryDAO) getBeanFactory().getBeanByName(BeanFactory.OBSERVATORY_DAO_BEAN_NAME); 
 		
 	}
 	
-public DrainageBasinDAO getDrainageBasinDAO() {
+	public DrainageBasinDAO getDrainageBasinDAO() {
 		
 		return (DrainageBasinDAO) getBeanFactory().getBeanByName(BeanFactory.DRAINAGE_BASIN_DAO_BEAN_NAME); 
 		

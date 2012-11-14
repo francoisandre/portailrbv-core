@@ -1,13 +1,17 @@
 package fr.obsmip.sedoo.core.domain;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
+@Entity
+@Table(name="SITE")
 public class Site {
 	
 	@Id
@@ -67,6 +71,14 @@ public class Site {
 		this.altitude = altitude;
 	}
 	
+	public DrainageBasin getDrainageBasin() {
+		return drainageBasin;
+	}
+
+	public void setDrainageBasin(DrainageBasin drainageBasin) {
+		this.drainageBasin = drainageBasin;
+	}
+
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="DRAINAGE_BASIN_ID")
 	private DrainageBasin drainageBasin;
