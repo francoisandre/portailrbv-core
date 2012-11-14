@@ -36,7 +36,7 @@ public class TestRBVMetadata
 		ObservatoryDAO observatoryDAO = RBVApplication.getInstance().getObservatoryDAO();
 		Observatory observa = observatoryDAO.getObservatoryById(1L);
 		Assert.assertNotNull("L'observatoire doit exister", observa);
-		ObservationSite site4 = observa.getObservationSiteByName("site 4");
+		Site site4 = observa.getObservationSiteByName("site 4");
 		Assert.assertNotNull("Le site doit exister", site4);
 //		davisPluviometer.setDrainageBasin();
 		

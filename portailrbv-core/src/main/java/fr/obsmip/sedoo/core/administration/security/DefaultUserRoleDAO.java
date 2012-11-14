@@ -2,9 +2,6 @@ package fr.obsmip.sedoo.core.administration.security;
 
 import java.util.List;
 
-import fr.carnavello.administration.commons.security.api.Role;
-import fr.carnavello.administration.commons.security.api.User;
-import fr.carnavello.administration.commons.security.api.dao.RoleDAO;
 
 /**
  * @author andre
@@ -28,6 +25,7 @@ public class DefaultUserRoleDAO implements RoleDAO
 	public void setRoles(List<Role> roles) {
 		this.roles = roles;
 	}
+
 	
 	
 }

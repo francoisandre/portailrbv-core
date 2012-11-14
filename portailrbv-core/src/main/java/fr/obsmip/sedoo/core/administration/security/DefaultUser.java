@@ -1,6 +1,5 @@
 package fr.obsmip.sedoo.core.administration.security;
 
-import fr.carnavello.administration.commons.security.impl.UserImpl;
 
 /**
  * @author andre

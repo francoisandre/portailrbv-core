@@ -69,6 +69,25 @@ public class ObservatoryDAOSpringImpl implements ObservatoryDAO
 	}
 
 
+
+
+
+	public Observatory getObservatoryById(Long id, boolean full) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+
+
+	public Observatory getObservatoryByShortLabel(String shortLabel,
+			boolean full) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 	
 
 
