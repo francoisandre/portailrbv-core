@@ -30,39 +30,39 @@ public class TestRBVMetadata
 	@Test
 	public void testObsera() throws Exception 
 	{
-		Metadata davisPluviometer = new Metadata();
-		davisPluviometer.setResourceTitle("Mesures pluviométriques relatives au bassin versant de Bras-David");
-		davisPluviometer.setResourceAbstract("Précipitations et températures enregistrées depuis novembre 2011 sur le site 4 du bassin versant de Bras-David");
-		ObservatoryDAO observatoryDAO = RBVApplication.getInstance().getObservatoryDAO();
-		Observatory observa = observatoryDAO.getObservatoryById(1L);
-		Assert.assertNotNull("L'observatoire doit exister", observa);
-		Site site4 = observa.getObservationSiteByName("site 4");
-		Assert.assertNotNull("Le site doit exister", site4);
-//		davisPluviometer.setDrainageBasin();
-		
-		DefaultInstrument instrument = new DefaultInstrument();
-		
-		instrument.setType(Constants.RAIN_JAUGE);
-		instrument.setType(new DefaultInternationalString("RAIN JAUGE"));
-		
-		davisPluviometer.getIdentificationInfo().add(new RBVIdentification());
-		
-		DefaultAcquisitionInformation acquisitionInformation = new DefaultAcquisitionInformation();
-		acquisitionInformation.setInstruments(Collections.singletonList(instrument));
-		davisPluviometer.setAcquisitionInformation(Collections.singletonList(acquisitionInformation));
-		
-		RBVIdentification identification = new RBVIdentification();
-		identification.setRelatedCitations(Collections.singletonList(new DefaultCitation("cccc")));
-		
-		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-		XML.marshal(identification, outputStream);
-		String aux = outputStream.toString();
-		System.out.println(MetadataTools.prettyFormat(aux,2));
-		
-		
-		
-		String result = MetadataTools.toXML(davisPluviometer);
-//		logger.debug("\n"+result);
+//		Metadata davisPluviometer = new Metadata();
+//		davisPluviometer.setResourceTitle("Mesures pluviométriques relatives au bassin versant de Bras-David");
+//		davisPluviometer.setResourceAbstract("Précipitations et températures enregistrées depuis novembre 2011 sur le site 4 du bassin versant de Bras-David");
+//		ObservatoryDAO observatoryDAO = RBVApplication.getInstance().getObservatoryDAO();
+//		Observatory observa = observatoryDAO.getObservatoryById(1L);
+//		Assert.assertNotNull("L'observatoire doit exister", observa);
+//		Site site4 = observa.getObservationSiteByName("site 4");
+//		Assert.assertNotNull("Le site doit exister", site4);
+////		davisPluviometer.setDrainageBasin();
+//		
+//		DefaultInstrument instrument = new DefaultInstrument();
+//		
+//		instrument.setType(Constants.RAIN_JAUGE);
+//		instrument.setType(new DefaultInternationalString("RAIN JAUGE"));
+//		
+//		davisPluviometer.getIdentificationInfo().add(new RBVIdentification());
+//		
+//		DefaultAcquisitionInformation acquisitionInformation = new DefaultAcquisitionInformation();
+//		acquisitionInformation.setInstruments(Collections.singletonList(instrument));
+//		davisPluviometer.setAcquisitionInformation(Collections.singletonList(acquisitionInformation));
+//		
+//		RBVIdentification identification = new RBVIdentification();
+//		identification.setRelatedCitations(Collections.singletonList(new DefaultCitation("cccc")));
+//		
+//		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+//		XML.marshal(identification, outputStream);
+//		String aux = outputStream.toString();
+//		System.out.println(MetadataTools.prettyFormat(aux,2));
+//		
+//		
+//		
+//		String result = MetadataTools.toXML(davisPluviometer);
+////		logger.debug("\n"+result);
 	}
 
 		
