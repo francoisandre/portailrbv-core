@@ -9,7 +9,7 @@
 	
 	<!-- Le fournisseur de contexte statique -->  
 	<bean id="contextApplicationContextProvider"
-		class="fr.carnavello.administration.commons.spring.ApplicationContextProvider" />
+		class="fr.obsmip.sedoo.core.spring.ApplicationContextProvider" />
 
 
 

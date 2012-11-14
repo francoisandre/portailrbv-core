@@ -23,6 +23,13 @@
 	
 	<dependencies>
 
+<dependency>
+  		<groupId>javax.servlet</groupId>
+  		<artifactId>servlet-api</artifactId>
+  		<version>3.0-alpha-1</version>
+  		<scope>provided</scope>
+  	</dependency>
+
 <!--  
 Dependences Carnavello 
 --> 
@@ -165,6 +172,7 @@ Dependences Carnavello
 				<configuration>
 					<source>1.6</source>
 					<target>1.6</target>
+					<showWarnings>true</showWarnings>
 				</configuration>
 			</plugin>
   </plugins>
