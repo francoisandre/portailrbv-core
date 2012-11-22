@@ -9,7 +9,7 @@ public interface ObservatoryDAO
 	Observatory getObservatoryById(Long id, boolean full);
 	Observatory create();
 	List<Observatory> findAll();
-	void save(Observatory observatory) throws Exception;
+	Long save(Observatory observatory) throws Exception;
 	void delete(Long id) throws Exception;
 	Observatory getObservatoryByShortLabel(String shortLabel, boolean full);
 }

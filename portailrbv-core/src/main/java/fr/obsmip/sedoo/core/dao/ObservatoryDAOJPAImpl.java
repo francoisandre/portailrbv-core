@@ -45,15 +45,18 @@ public class ObservatoryDAOJPAImpl implements ObservatoryDAO{
 	}
 	
 	@Transactional
-	public void save(Observatory observatory) 
+	public Long save(Observatory observatory) 
 	{
 		if (observatory.getId() == null)
 		{
 			getEntityManager().persist(observatory);
+			return observatory.getId();
 		}
 		else
 		{
 			getEntityManager().merge(observatory);
+			Observatory aux = getObservatoryByShortLabel(observatory.getShortLabel(),false);
+			return aux.getId();
 		}
 	}
 

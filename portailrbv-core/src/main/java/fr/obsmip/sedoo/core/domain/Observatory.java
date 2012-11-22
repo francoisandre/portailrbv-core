@@ -40,8 +40,9 @@ public class Observatory implements LazyLoadable
 	
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="observatory", fetch=FetchType.LAZY)
 	private List<DrainageBasin> drainageBasins;
-
 	
+	@OneToMany(cascade=CascadeType.ALL, mappedBy="observatory", fetch=FetchType.LAZY)
+	private List<ObservatoryContact> contacts;
 	
 	public String getDescription() {
 		return description;
@@ -132,12 +133,34 @@ public class Observatory implements LazyLoadable
 		drainageBasins.add(drainageBasin);
 	}
 	
+	public void addContact(ObservatoryContact contact) 
+	{
+		if (contacts == null)
+		{
+			contacts = new ArrayList<ObservatoryContact>();
+		}
+		
+		contact.setObservatory(this);
+		contacts.add(contact);
+	}
+	
 	@Override
 	public void ensureFullyLoaded() {
-		Iterator<DrainageBasin> iterator = getDrainageBasins().iterator();
-		while (iterator.hasNext()) {
-			DrainageBasin drainageBasin = (DrainageBasin) iterator.next();
+		Iterator<DrainageBasin> drainageBasinIterator = getDrainageBasins().iterator();
+		while (drainageBasinIterator.hasNext()) {
+			DrainageBasin drainageBasin = drainageBasinIterator.next();
 			drainageBasin.ensureFullyLoaded();
 		}
+		Iterator<ObservatoryContact> contactIterator = getContacts().iterator();
+		while (contactIterator.hasNext()) {
+			ObservatoryContact contact = contactIterator.next();
+			contact.ensureFullyLoaded();
+		}
+	}
+	public List<ObservatoryContact> getContacts() {
+		return contacts;
+	}
+	public void setContacts(List<ObservatoryContact> contacts) {
+		this.contacts = contacts;
 	}
 }

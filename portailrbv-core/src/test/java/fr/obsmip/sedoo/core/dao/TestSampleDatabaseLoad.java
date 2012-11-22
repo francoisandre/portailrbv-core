@@ -14,6 +14,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import fr.obsmip.sedoo.core.domain.DrainageBasin;
 import fr.obsmip.sedoo.core.domain.Observatory;
+import fr.obsmip.sedoo.core.domain.ObservatoryContact;
 import fr.obsmip.sedoo.core.domain.Site;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -56,6 +57,15 @@ public class TestSampleDatabaseLoad
 		obsera.setShortLabel("ObsErA");
 		obsera.setDescription("L'Observatoire de l’Erosion aux Antilles (ObsErA) est un service d'observation de l’INSU-CNRS et de l’Institut de Physique du Globe de Paris consacré à l'étude de l’altération et de l’érosion aux Antilles. Membre du Réseau de Bassins Versants de Recherche et du Critical Zone Observatory Network, il implique des équipes de l'Institut de Physique du Globe de Paris, de l'Observatoire Volcanologique et Sismologique de Guadeloupe, de l'Université Antilles-Guyane, de l'Institut Universitaire Européen de la Mer (UBO) et du Laboratoire de Sciences de la Terre de l'Université Claude Bernard (Lyon I). L’objectif d’ObsErA est de permettre la constitution d’une base de données des flux d’eau (précipitations et débit des rivières), des flux de sédiments et de matière organique (en particulier de carbone) dans les rivières et sur les versants ainsi que de la composition chimique des rivières et des sols dans le contexte particulier de l’île de Basse-Terre en Guadeloupe, marquée par un climat tropical et un volcanisme actif. Cette base de données permettra à la communauté scientifique d'étudier et de quantifier les modes de d’érosion chimique et physique, ainsi que leur impact sur l'environnement (composition des sols, chimie des rivières, flux de carbones, etc...). A ce jour, ObsErA suit l'évolution de 3 bassins versants localisés dans l'enceinte du Parc National de Guadeloupe : Capesterre, Bras-David et Vieux-Habitants.");
 
+		
+		ObservatoryContact contact1 = new ObservatoryContact();
+		contact1.setOrganisationName("IRD");
+		contact1.setPersonName("Jacques Célère");
+		contact1.setOrganisationName("IRD");
+		contact1.setEmail("jacques@ird.fr");
+		
+		obsera.addContact(contact1);
+		
 		DrainageBasin capesterre = new DrainageBasin();
 		capesterre.setName("Capesterre");
 

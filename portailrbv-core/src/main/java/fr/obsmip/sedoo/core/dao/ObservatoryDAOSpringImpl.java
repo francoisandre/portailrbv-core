@@ -49,8 +49,8 @@ public class ObservatoryDAOSpringImpl implements ObservatoryDAO
 
 
 
-	public void save(Observatory observatory) throws Exception {
-		// TODO Auto-generated method stub
+	public Long save(Observatory observatory) throws Exception {
+		return 1L;
 		
 	}
 

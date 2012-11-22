@@ -4,7 +4,10 @@ import fr.obsmip.sedoo.core.administration.security.Authenticator;
 import fr.obsmip.sedoo.core.config.GeoNetworkConfig;
 import fr.obsmip.sedoo.core.dao.DrainageBasinDAO;
 import fr.obsmip.sedoo.core.dao.MetadataDAO;
+import fr.obsmip.sedoo.core.dao.ObservatoryContactDAO;
 import fr.obsmip.sedoo.core.dao.ObservatoryDAO;
+import fr.obsmip.sedoo.core.dao.PersonDAO;
+import fr.obsmip.sedoo.core.dao.SiteDAO;
 import fr.obsmip.sedoo.core.dao.UserDAO;
 import fr.obsmip.sedoo.core.spring.SpringBeanFactory;
 
@@ -89,6 +92,24 @@ public class RBVApplication
 		return (DrainageBasinDAO) getBeanFactory().getBeanByName(BeanFactory.DRAINAGE_BASIN_DAO_BEAN_NAME); 
 		
 	}
+	
+public SiteDAO getSiteDAO() {
+		
+		return (SiteDAO) getBeanFactory().getBeanByName(BeanFactory.DRAINAGE_BASIN_DAO_BEAN_NAME); 
+		
+	}
+
+public PersonDAO getPersonDAO() {
+	
+	return (PersonDAO) getBeanFactory().getBeanByName(BeanFactory.PERSON_DAO_BEAN_NAME); 
+	
+}
+
+public ObservatoryContactDAO getObservatoryContactDAO() {
+	
+	return (ObservatoryContactDAO) getBeanFactory().getBeanByName(BeanFactory.OBSERVATORY_CONTACT_DAO_BEAN_NAME); 
+	
+}
 	
 	
 	
