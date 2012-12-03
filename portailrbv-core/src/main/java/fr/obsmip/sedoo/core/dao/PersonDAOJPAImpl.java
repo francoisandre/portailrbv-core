@@ -25,9 +25,6 @@ public class PersonDAOJPAImpl implements PersonDAO{
 	public Person getPersonById(Long id, boolean full) 
 	{
     	Person person = getEntityManager().find(Person.class, id); 
-    	if (full == true)
-    	{
-    	}
     	return person;
 	}
 

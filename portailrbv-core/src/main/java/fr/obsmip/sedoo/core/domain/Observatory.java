@@ -28,6 +28,12 @@ public class Observatory implements LazyLoadable
 	@Column(name="DESCRIPTION")
 	private String description;
 	
+	@Column(name="USE_CONDITIONS")
+	private String useConditions;
+	
+	@Column(name="PUBLIC_ACCESS_LIMITATIONS")
+	private String publicAccessLimitations;
+	
 	@Column(name="LONG_LABEL")
 	private String longLabel;
 	
@@ -162,5 +168,17 @@ public class Observatory implements LazyLoadable
 	}
 	public void setContacts(List<ObservatoryContact> contacts) {
 		this.contacts = contacts;
+	}
+	public String getUseConditions() {
+		return useConditions;
+	}
+	public void setUseConditions(String useConditions) {
+		this.useConditions = useConditions;
+	}
+	public String getPublicAccessLimitations() {
+		return publicAccessLimitations;
+	}
+	public void setPublicAccessLimitations(String publicAccessLimitations) {
+		this.publicAccessLimitations = publicAccessLimitations;
 	}
 }

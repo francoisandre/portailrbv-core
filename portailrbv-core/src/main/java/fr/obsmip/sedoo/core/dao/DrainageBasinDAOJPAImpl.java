@@ -33,6 +33,8 @@ public class DrainageBasinDAOJPAImpl implements DrainageBasinDAO{
     	{
     		//Full loading of childrens
     		drainageBasin.ensureFullyLoaded();
+    		//Full loadind of parent
+    		drainageBasin.getObservatory().getDescription();
     	}
     	return drainageBasin;
 	}
