@@ -95,7 +95,7 @@ public class RBVApplication
 	
 public SiteDAO getSiteDAO() {
 		
-		return (SiteDAO) getBeanFactory().getBeanByName(BeanFactory.DRAINAGE_BASIN_DAO_BEAN_NAME); 
+		return (SiteDAO) getBeanFactory().getBeanByName(BeanFactory.SITE_DAO_BEAN_NAME); 
 		
 	}
 
