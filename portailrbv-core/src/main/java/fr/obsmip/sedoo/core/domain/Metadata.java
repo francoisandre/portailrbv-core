@@ -14,6 +14,7 @@ import org.geotoolkit.metadata.iso.DefaultMetadata;
 import org.geotoolkit.metadata.iso.citation.DefaultCitation;
 import org.geotoolkit.metadata.iso.citation.DefaultCitationDate;
 import org.geotoolkit.metadata.iso.citation.DefaultOnlineResource;
+import org.geotoolkit.metadata.iso.constraint.DefaultConstraints;
 import org.geotoolkit.metadata.iso.distribution.DefaultDigitalTransferOptions;
 import org.geotoolkit.metadata.iso.distribution.DefaultDistribution;
 import org.geotoolkit.metadata.iso.extent.DefaultExtent;
@@ -28,12 +29,14 @@ import org.opengis.metadata.citation.CitationDate;
 import org.opengis.metadata.citation.DateType;
 import org.opengis.metadata.citation.OnlineResource;
 import org.opengis.metadata.citation.ResponsibleParty;
+import org.opengis.metadata.constraint.Constraints;
 import org.opengis.metadata.distribution.DigitalTransferOptions;
 import org.opengis.metadata.extent.Extent;
 import org.opengis.metadata.extent.GeographicExtent;
 import org.opengis.metadata.identification.Keywords;
 import org.opengis.metadata.maintenance.ScopeCode;
 import org.opengis.referencing.ReferenceSystem;
+import org.opengis.util.InternationalString;
 
 import fr.obsmip.sedoo.core.BeanFactory;
 import fr.obsmip.sedoo.core.RBVApplication;
@@ -49,7 +52,7 @@ public class Metadata extends DefaultMetadata
 	
 	public final static Collection<ScopeCode> HIERARCHY_LEVEL = Collections.singletonList(ScopeCode.DATASET);
 	
-	public Metadata() throws MetadataInitialisationException 
+	public Metadata()  
 	{
 		super();
 		initDefaultValues();
@@ -62,10 +65,10 @@ public class Metadata extends DefaultMetadata
 	
 	
 
-	private void initDefaultValues() throws MetadataInitialisationException
+	private void initDefaultValues() 
 	{
 		setHierarchyLevels(HIERARCHY_LEVEL);
-		loadMetadataContacts();
+		//loadMetadataContacts();
 		Collection<ReferenceSystem> referenceSystemInfo = getReferenceSystemInfo();
 	}
 	
@@ -230,6 +233,53 @@ public class Metadata extends DefaultMetadata
 		}
 		
 		dataIdentification.setDescriptiveKeywords(values);
+	}
+	
+	public String getUseConditions()
+	{
+		DefaultDataIdentification dataIdentification =  MetadataTools.getFisrtIdentificationInfo(this);
+		Collection<Constraints> resourceConstraints = dataIdentification.getResourceConstraints();
+		if ((resourceConstraints == null) || (resourceConstraints.isEmpty()))
+		{
+			return EMPTY_STRING;
+		}
+		else
+		{
+			Constraints constraints = resourceConstraints.iterator().next();
+			Collection<? extends InternationalString> useLimitations = constraints.getUseLimitations();
+			if ((useLimitations == null) || (useLimitations.isEmpty()))
+			{
+				return EMPTY_STRING;
+			}
+			else
+			{
+				return useLimitations.iterator().next().toString();
+			}
+		}
+	}
+	
+	
+	public void setUseConditions(String useConditions)
+	{
+		DefaultDataIdentification dataIdentification =  MetadataTools.getFisrtIdentificationInfo(this);
+		Collection<Constraints> resourceConstraints = dataIdentification.getResourceConstraints();
+		if ((resourceConstraints == null))
+		{
+			resourceConstraints = new ArrayList<Constraints>();
+		}
+		
+		DefaultConstraints constraints =  null;
+		if (resourceConstraints.isEmpty())
+		{
+			constraints = new DefaultConstraints();
+		}
+		else
+		{
+			constraints = new DefaultConstraints(resourceConstraints.iterator().next());
+		}
+		
+		InternationalString value = new DefaultInternationalString(useConditions);
+		constraints.setUseLimitations(Collections.singletonList(value));
 	}
 	
 	public void setResourceURL(List<String> urls)
@@ -401,14 +451,14 @@ public class Metadata extends DefaultMetadata
 	 * Positionne la liste des points de contact des métadonnées, c-a-d, le sedoo.  
 	 * @throws MetadataInitialisationException 
 	 */
-	public void loadMetadataContacts() throws MetadataInitialisationException
+	public void loadMetadataContacts() 
 	{
 		ContactDAO dao = (ContactDAO) RBVApplication.getInstance().getBeanFactory().getBeanByName(BeanFactory.CONTACT_DAO_BEAN_NAME);
 		List<Contact> contacts = dao.getMetadataContacts();
 		
 		if ((contacts == null) || (contacts.size()==0))
 		{
-			throw new MetadataInitialisationException("Impossible de récupérer les contacts de métadonnées");
+//			throw new MetadataInitialisationException("Impossible de récupérer les contacts de métadonnées");
 		}
 		
 		else
@@ -492,6 +542,18 @@ public class Metadata extends DefaultMetadata
 	{
 		return "coucou";
 	}
+	
+	public String getUuid()
+	{
+		return getFileIdentifier();
+	}
+	
+	public void setUuid(String value)
+	{
+		setFileIdentifier(value);
+	}
+	
+	
 	
 	
 }

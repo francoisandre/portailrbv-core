@@ -183,11 +183,15 @@ public final class MetadataTools {
 
 	public static Metadata getEmptyMetadata() 
 	{
-		try {
 			return new Metadata();
-		} catch (MetadataInitialisationException e) {
-			return null;
-		}
-		
+	}
+	
+	public static Summary toSummary(Metadata metadata)
+	{
+		Summary summary = new Summary();
+		summary.setUuid(metadata.getUuid());
+		summary.setResourceAbstract(metadata.getResourceAbstract());
+		summary.setResourceTitle(metadata.getResourceTitle());
+		return summary;
 	}
 }

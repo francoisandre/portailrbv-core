@@ -4,7 +4,7 @@ public class Summary
 {
 	private String resourceAbstract;
 	private String resourceTitle;
-	private String identifier;
+	private String uuid;
 	
 	public String getResourceTitle() {
 		return resourceTitle;
@@ -18,11 +18,12 @@ public class Summary
 	public void setResourceAbstract(String resourceAbstract) {
 		this.resourceAbstract = resourceAbstract;
 	}
-	public String getIdentifier() {
-		return identifier;
+	public String getUuid() {
+		return uuid;
 	}
-	public void setIdentifier(String identifier) {
-		this.identifier = identifier;
+	public void setUuid(String uuid) {
+		this.uuid = uuid;
 	}
+	
 
 }
