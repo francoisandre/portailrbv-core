@@ -5,9 +5,13 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
-import fr.obsmip.sedoo.core.domain.Metadata;
-import fr.obsmip.sedoo.core.domain.MetadataTools;
-import fr.obsmip.sedoo.core.domain.Summary;
+import org.geotoolkit.metadata.iso.extent.DefaultGeographicBoundingBox;
+import org.opengis.metadata.extent.GeographicBoundingBox;
+
+import fr.sedoo.commons.metadata.utils.domain.DescribedURL;
+import fr.sedoo.commons.metadata.utils.domain.Metadata;
+import fr.sedoo.commons.metadata.utils.domain.MetadataTools;
+import fr.sedoo.commons.metadata.utils.domain.Summary;
 
 public class FakeMetadataDAO implements MetadataDAO{
 
@@ -33,7 +37,16 @@ public class FakeMetadataDAO implements MetadataDAO{
 		m.setResourceAbstract("abstract #"+i);
 		m.setUuid("my Id-"+i);
 		m.setUseConditions("useConditions #"+i);
-		//TODO Public Access
+		DefaultGeographicBoundingBox box = new DefaultGeographicBoundingBox();
+		box.setEastBoundLongitude(7.1383);
+		box.setWestBoundLongitude(2.3992);
+		box.setSouthBoundLatitude(43.5445);
+		box.setNorthBoundLatitude(47.0797);
+		m.setGeographicBoundingBox(box);
+		
+		List<DescribedURL> resourceURL= new ArrayList<DescribedURL>() {{ add(new DescribedURL("http://www.google.com", "google")); add(new DescribedURL("http://www.lemonde.fr", "lemonde")); }};
+		m.setResourceURL(resourceURL);
+		
 		return m; 
 	}
 

@@ -11,9 +11,9 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import fr.obsmip.sedoo.core.domain.Metadata;
-import fr.obsmip.sedoo.core.domain.Summary;
 import fr.obsmip.sedoo.core.domain.User;
+import fr.sedoo.commons.metadata.utils.domain.Metadata;
+import fr.sedoo.commons.metadata.utils.domain.Summary;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations={"classpath:/META-INF/spring/contextProvider.xml","classpath:/META-INF/spring/config-test.xml","classpath:/META-INF/spring/contacts.xml"})

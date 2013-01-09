@@ -13,8 +13,8 @@ import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.Namespace;
 
-import fr.obsmip.sedoo.core.dao.csw.xml.SummaryUnmarshaller;
-import fr.obsmip.sedoo.core.domain.Summary;
+import fr.sedoo.commons.metadata.utils.domain.Summary;
+import fr.sedoo.commons.metadata.utils.tools.SummaryUnmarshaller;
 
 public class MySummaryRequest extends AuthenticatedRequest
 {

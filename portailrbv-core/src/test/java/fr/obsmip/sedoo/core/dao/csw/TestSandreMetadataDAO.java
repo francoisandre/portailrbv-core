@@ -7,7 +7,7 @@ import junit.framework.Assert;
 
 import org.junit.Test;
 
-import fr.obsmip.sedoo.core.domain.Summary;
+import fr.sedoo.commons.metadata.utils.domain.Summary;
 
 public class TestSandreMetadataDAO 
 {

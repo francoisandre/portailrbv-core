@@ -9,9 +9,9 @@ import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 
 import fr.obsmip.sedoo.core.dao.MetadataDAO;
-import fr.obsmip.sedoo.core.domain.Metadata;
-import fr.obsmip.sedoo.core.domain.MetadataTools;
 import fr.obsmip.sedoo.core.misc.HTTPTools;
+import fr.sedoo.commons.metadata.utils.domain.Metadata;
+import fr.sedoo.commons.metadata.utils.domain.MetadataTools;
 
 public abstract class CSWMetadataDAO implements MetadataDAO{
 

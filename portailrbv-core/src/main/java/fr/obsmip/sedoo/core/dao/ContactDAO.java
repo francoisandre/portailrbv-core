@@ -2,7 +2,7 @@ package fr.obsmip.sedoo.core.dao;
 
 import java.util.List;
 
-import fr.obsmip.sedoo.core.domain.Contact;
+import fr.sedoo.commons.metadata.utils.domain.Contact;
 
 public class ContactDAO {
 

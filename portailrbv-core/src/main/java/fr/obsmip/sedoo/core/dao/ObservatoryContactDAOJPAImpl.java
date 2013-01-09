@@ -6,10 +6,7 @@ import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import ch.qos.logback.classic.pattern.EnsureExceptionHandling;
-
 import fr.obsmip.sedoo.core.domain.ObservatoryContact;
-import fr.obsmip.sedoo.core.domain.Person;
 
 @Repository
 public class ObservatoryContactDAOJPAImpl implements ObservatoryContactDAO{

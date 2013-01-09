@@ -6,10 +6,10 @@ import javax.naming.AuthenticationException;
 
 import com.sun.jersey.api.client.ClientResponse;
 
-import fr.obsmip.sedoo.core.dao.csw.xml.SummaryUnmarshaller;
-import fr.obsmip.sedoo.core.domain.Metadata;
-import fr.obsmip.sedoo.core.domain.Summary;
 import fr.obsmip.sedoo.core.misc.HTTPTools;
+import fr.sedoo.commons.metadata.utils.domain.Metadata;
+import fr.sedoo.commons.metadata.utils.domain.Summary;
+import fr.sedoo.commons.metadata.utils.tools.SummaryUnmarshaller;
 
 public class SandreCSWMetadataDAO extends CSWMetadataDAO {
 

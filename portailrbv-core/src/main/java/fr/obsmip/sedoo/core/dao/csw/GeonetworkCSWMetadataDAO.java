@@ -4,8 +4,8 @@ import java.util.List;
 
 import javax.naming.AuthenticationException;
 
-import fr.obsmip.sedoo.core.domain.Summary;
 import fr.obsmip.sedoo.core.misc.HTTPTools;
+import fr.sedoo.commons.metadata.utils.domain.Summary;
 
 public class GeonetworkCSWMetadataDAO extends CSWMetadataDAO 
 {

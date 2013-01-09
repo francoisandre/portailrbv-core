@@ -11,9 +11,9 @@ import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.Namespace;
 
-import fr.obsmip.sedoo.core.dao.csw.xml.MetadataUnmarshaller;
-import fr.obsmip.sedoo.core.domain.Metadata;
-import fr.obsmip.sedoo.core.domain.MetadataTools;
+import fr.sedoo.commons.metadata.utils.domain.Metadata;
+import fr.sedoo.commons.metadata.utils.domain.MetadataTools;
+import fr.sedoo.commons.metadata.utils.tools.MetadataUnmarshaller;
 
 public class MetadataByIdRequest extends AuthenticatedRequest
 {

@@ -6,7 +6,7 @@ import junit.framework.Assert;
 import org.junit.Test;
 
 import fr.obsmip.sedoo.core.dao.MetadataDAO;
-import fr.obsmip.sedoo.core.domain.Metadata;
+import fr.sedoo.commons.metadata.utils.domain.Metadata;
 
 public class TestCSWMetadataDAO 
 {

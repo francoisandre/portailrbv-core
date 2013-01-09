@@ -2,8 +2,8 @@ package fr.obsmip.sedoo.core.dao;
 
 import java.util.List;
 
-import fr.obsmip.sedoo.core.domain.Metadata;
-import fr.obsmip.sedoo.core.domain.Summary;
+import fr.sedoo.commons.metadata.utils.domain.Metadata;
+import fr.sedoo.commons.metadata.utils.domain.Summary;
 
 
 public interface MetadataDAO
